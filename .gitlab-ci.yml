@@ -1,0 +1,22 @@
+variables:
+  PROJECT_NAME: 'Gamestore'
+
+test:
+  image: mcr.microsoft.com/dotnet/sdk:8.0
+  stage: test
+  tags:
+    - main
+  script:
+    - dotnet tool install -g dotnet-reportgenerator-globaltool
+    - export PATH="$PATH:$HOME/.dotnet/tools"
+    - 'dotnet test --collect:"XPlat Code Coverage" --results-directory artifacts/test_results/ /p:CollectCoverage=true /p:Threshold=50 /p:ThresholdStat=total /p:ExcludeByFile="**/Migrations/*"' 
+    - reportgenerator -reports:artifacts/test_results/**/coverage.cobertura.xml -targetdir:artifacts/coverage_report
+  coverage: '/Total\s*\|\s*(\d+(?:\.\d+)?)/'
+  artifacts:
+    paths:
+      - 'artifacts/test_results/*/coverage.cobertura.xml'
+      - 'artifacts/coverage_report/*'
+    reports:
+      coverage_report:
+        coverage_format: cobertura
+        path: 'artifacts/test_results/*/coverage.cobertura.xml'
