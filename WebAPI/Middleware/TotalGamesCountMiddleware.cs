@@ -2,9 +2,9 @@
 
 namespace WebAPI.Middleware;
 
-public class TotalGamesCountMiddleware(RequestDelegate next, IServiceProvider serviceProvider)
+public class TotalGamesCountMiddleware(IServiceProvider serviceProvider) : IMiddleware
 {
-    public async Task InvokeAsync(HttpContext context)
+    public async Task InvokeAsync(HttpContext context, RequestDelegate next)
     {
         using (var scope = serviceProvider.CreateScope())
         {
