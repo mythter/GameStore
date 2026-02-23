@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DataAccess.Configutations;
+
 public class GamePlatformConfiguration : IEntityTypeConfiguration<GamePlatform>
 {
     public void Configure(EntityTypeBuilder<GamePlatform> builder)

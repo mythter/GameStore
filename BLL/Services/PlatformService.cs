@@ -8,6 +8,7 @@ using DataAccess.Repositories.Interfaces;
 using DataAccess.UnitOfWork;
 
 namespace BusinessLogic.Services;
+
 public class PlatformService(
     IUnitOfWork unitOfWork,
     IMapper mapper) : IPlatformService

@@ -3,6 +3,7 @@ using DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories;
+
 public class RepositoryBase<T>(GameStoreDbContext context) : IRepositoryBase<T>
     where T : class
 {

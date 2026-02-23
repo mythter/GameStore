@@ -11,6 +11,7 @@ using DataAccess.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 
 namespace BusinessLogic.Services;
+
 public class GameService(
     IUnitOfWork unitOfWork,
     IMapper mapper) : IGameService

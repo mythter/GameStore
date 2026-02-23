@@ -4,6 +4,7 @@ using DataAccess.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataAccess.Repositories;
+
 public class GameRepository(GameStoreDbContext context)
     : RepositoryBase<Game>(context), IGameRepository
 {

@@ -8,6 +8,7 @@ using DataAccess.Repositories.Interfaces;
 using DataAccess.UnitOfWork;
 
 namespace BusinessLogic.Services;
+
 public class GenreService(
     IUnitOfWork unitOfWork,
     IMapper mapper) : IGenreService
