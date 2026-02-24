@@ -37,8 +37,10 @@ if (app.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
 }
-
-app.UseExceptionHandler();
+else
+{
+    app.UseExceptionHandler();
+}
 
 app.UseMiddleware<RequestLoggingMiddleware>();
 

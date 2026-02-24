@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Middleware;
 
-public class GlobalExceptionHandler : IExceptionHandler
+public class GlobalExceptionHandler(IProblemDetailsService problemDetailsService) : IExceptionHandler
 {
+    private readonly IProblemDetailsService _problemDetailsService = problemDetailsService;
+
     public async ValueTask<bool> TryHandleAsync(
         HttpContext httpContext,
         Exception exception,
@@ -34,10 +36,11 @@ public class GlobalExceptionHandler : IExceptionHandler
 
         httpContext.Response.StatusCode = problemDetails.Status.Value;
 
-        await httpContext
-            .Response
-            .WriteAsJsonAsync(problemDetails, cancellationToken);
-
-        return true;
+        return await _problemDetailsService.TryWriteAsync(
+            new ProblemDetailsContext
+            {
+                HttpContext = httpContext,
+                ProblemDetails = problemDetails,
+            });
     }
 }
